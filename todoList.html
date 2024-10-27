@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8e4f2, #f4d8eb, #fdeef5, #ffffff);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Hide any overflow from floating images */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-image {
+            position: absolute;
+            opacity: 0.5;
+            animation: float 10s infinite ease-in-out;
+            width: 100px;
+            height: auto;
+        }
+
+        .floating-image1 { top: 10%; left: 20%; animation-delay: 0s; }
+        .floating-image2 { bottom: 15%; right: 25%; animation-delay: 2s; }
+        .floating-image3 { bottom: 10%; right: 70%; animation-delay: 2s; }
+        .floating-image4 { bottom: 70%; right: 30%; animation-delay: 2s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        #todoApp {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        #todoApp img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .completed {
+            color: #ecebae;
+            font-weight: bold;
+            background-color: #a9c7f1;
+            height: 20px;
+        }
+
+       .tt {
+            background-color: #e27c7c;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .done-btn {
+            background-color:#fefcfe;
+            border: solid 1px #fefcfe;
+            
+            
+
+
+        }
+.delete-btn{
+    background-color:#fefcfe;
+    border: solid 1px #fefcfe;
+
+}
+        h1 {
+            color: #a9c7f1;
+        }
+    </style>
+
+    <img src="a8f95971-de2f-45b0-9801-96d567081935.jpg" class="floating-image floating-image1" alt="Floating decoration">
+    <img src="☆ youtube _°・＊.jpg" class="floating-image floating-image2" alt="Floating decoration">
+    <img src="My my melody 3d.jpg" class="floating-image floating-image3" alt="Floating decoration">
+    <img src="974175e4-277c-43a1-a243-012ae6655261.jpg" class="floating-image floating-image4" alt="Floating decoration">
+</head>
+<body>
+
+<div id="todoApp">
+    <h1>TO DO</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task" />
+    <button class="tt" onclick="addTask()">+</button>
+    <ul id="taskList"></ul>
+    <img src="76517651-bb15-45e1-88e2-930b3401ff8a.jpg" alt="" width="150">
+</div>
+
+<script>
+    function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const taskText = taskInput.value.trim();
+
+        if (taskText !== "") {
+            const taskList = document.getElementById("taskList");
+
+            const listItem = document.createElement("li");
+
+            const taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+
+            const doneButton = document.createElement("button");
+            doneButton.innerHTML = '<img src="done.jpg" alt="Done Image" style="width: 20px;">';            doneButton.classList.add("done-btn");
+            doneButton.onclick = function () {
+                taskSpan.classList.toggle("completed");
+            };
+
+           const deleteButton = document.createElement("button");
+deleteButton.classList.add("delete-btn"); // Add class for styling
+deleteButton.innerHTML = '<img src="download.jpg" alt="Delete Image" style="width: 20px;">'; // Add image to button
+
+            deleteButton.onclick = function () {
+                taskList.removeChild(listItem); // Remove the list item on delete button click
+            };
+
+            listItem.appendChild(taskSpan);
+            listItem.appendChild(doneButton);
+            listItem.appendChild(deleteButton);
+            taskList.appendChild(listItem);
+
+            taskInput.value = ""; // Clear the input field
+        }
+    }
+</script>
+
+</body>
+</html>
